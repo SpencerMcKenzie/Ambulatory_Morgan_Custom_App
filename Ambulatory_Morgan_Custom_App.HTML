@@ -1,0 +1,91 @@
+<h2>Financial & Operational Metrics</h2>
+
+<!-- Calculated Value placeholders for multiple accounts -->
+<!-- Account 1 -->
+<!-- Account 1 -->
+<span id="account1">[Calculated Value: First([ValueWithPlaceHolders])]</span>
+<span id="jun1">[Calculated Value: Sum([Jun])]</span>
+<span id="jul1">[Calculated Value: Sum([Jul])]</span>
+<span id="aug1">[Calculated Value: Sum([Aug])]</span>
+<span id="sep1">[Calculated Value: Sum([Sep])]</span>
+<span id="fy26_1">[Calculated Value: Sum([FY26_YTD])]</span>
+<span id="fy25_1">[Calculated Value: Sum([FY25_YTD])]</span>
+
+<!-- Account 2 -->
+<span id="account2">[Calculated Value: First([ValueWithPlaceHolders])]</span>
+<span id="jun2">[Calculated Value: Sum([Jun])]</span>
+<span id="jul2">[Calculated Value: Sum([Jul])]</span>
+<span id="aug2">[Calculated Value: Sum([Aug])]</span>
+<span id="sep2">[Calculated Value: Sum([Sep])]</span>
+<span id="fy26_2">[Calculated Value: Sum([FY26_YTD])]</span>
+<span id="fy25_2">[Calculated Value: Sum([FY25_YTD])]</span>
+
+<!-- Account 3 -->
+<span id="account3">[Calculated Value: First([ValueWithPlaceHolders])]</span>
+<span id="jun3">[Calculated Value: Sum([Jun])]</span>
+<span id="jul3">[Calculated Value: Sum([Jul])]</span>
+<span id="aug3">[Calculated Value: Sum([Aug])]</span>
+<span id="sep3">[Calculated Value: Sum([Sep])]</span>
+<span id="fy26_3">[Calculated Value: Sum([FY26_YTD])]</span>
+<span id="fy25_3">[Calculated Value: Sum([FY25_YTD])]</span>
+
+
+<!-- Add more accounts as needed -->
+
+<table id="metricsTable" style="border-collapse: collapse; width: 100%; margin-top: 20px;">
+  <thead>
+    <tr style="background-color: #f2f2f2;">
+      <th rowspan="2">Accounts</th>
+      <th colspan="3" style="text-align: center;">Prior 3 Months</th>
+      <th rowspan="2">Sep</th>
+      <th rowspan="2">FY26 YTD</th>
+      <th rowspan="2">FY25 YTD</th>
+      <th rowspan="2">Diff</th>
+      <th rowspan="2">% Diff</th>
+    </tr>
+    <tr style="background-color: #f2f2f2;">
+      <th>Jun</th>
+      <th>Jul</th>
+      <th>Aug</th>
+    </tr>
+  </thead>
+  <tbody id="tableBody">
+    <!-- JavaScript will inject rows here -->
+  </tbody>
+</table>
+
+<script type="text/javascript">
+(function() {
+  var tbody = document.getElementById("tableBody");
+
+  // Define how many accounts you have
+  var totalAccounts = 2; // Update this number as needed
+
+  for (var i = 1; i <= totalAccounts; i++) {
+    var account = document.getElementById("account" + i).innerText;
+    var jun = parseFloat(document.getElementById("jun" + i).innerText);
+    var jul = parseFloat(document.getElementById("jul" + i).innerText);
+    var aug = parseFloat(document.getElementById("aug" + i).innerText);
+    var sep = parseFloat(document.getElementById("sep" + i).innerText);
+    var fy26 = parseFloat(document.getElementById("fy26_" + i).innerText);
+    var fy25 = parseFloat(document.getElementById("fy25_" + i).innerText);
+
+    var diff = fy26 - fy25;
+    var pct = fy25 !== 0 ? ((diff / fy25) * 100).toFixed(1) + "%" : "N/A";
+
+    var tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>${account}</td>
+      <td>${jun}</td>
+      <td>${jul}</td>
+      <td>${aug}</td>
+      <td>${sep}</td>
+      <td>${fy26}</td>
+      <td>${fy25}</td>
+      <td>${diff}</td>
+      <td>${pct}</td>
+    `;
+    tbody.appendChild(tr);
+  }
+})();
+</script>
